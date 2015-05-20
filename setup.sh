@@ -5,9 +5,14 @@ CONF="/etc/postgresql/9.4/main/postgresql.conf"
 
 # Restrict subnet to docker private network
 echo "host    all             all             0.0.0.0/0               md5" >> /etc/postgresql/9.4/main/pg_hba.conf
+echo "host    replication     postgres        147.100.92.2            trust" >> /etc/postgresql/9.4/main/pg_hba.conf
 # Listen on all ip addresses
 echo "listen_addresses = '*'" >> /etc/postgresql/9.4/main/postgresql.conf
 echo "port = 5432" >> /etc/postgresql/9.4/main/postgresql.conf
+echo "wal_level = logical" >> /etc/postgresql/9.4/main/postgresql.conf
+echo "max_wal_senders = 3" >> /etc/postgresql/9.4/main/postgresql.conf
+echo "max_replication_slots = 3" >> /etc/postgresql/9.4/main/postgresql.conf
+echo "hot_standby = on" >> /etc/postgresql/9.4/main/postgresql.conf
 
 # Enable ssl
 
