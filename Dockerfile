@@ -39,8 +39,8 @@ RUN chmod 0755 /setup.sh
 RUN /setup.sh
 
 # We will run any commands in this when the container starts
-ADD start-postgis.sh /start-postgis.sh
-RUN chmod 0755 /start-postgis.sh
+#ADD start-postgis.sh /start-postgis.sh
+#RUN chmod 0755 /start-postgis.sh
 
 #liaison container hôte
 VOLUME /var/lib/postgresql/9.4/main
