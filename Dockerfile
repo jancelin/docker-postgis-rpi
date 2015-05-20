@@ -42,4 +42,9 @@ RUN /setup.sh
 ADD start-postgis.sh /start-postgis.sh
 RUN chmod 0755 /start-postgis.sh
 
+#liaison container hôte
+VOLUME /var/lib/postgresql/9.4/main
+VOLUME /etc/postgresql/9.4/main
+
+
 CMD /start-postgis.sh
