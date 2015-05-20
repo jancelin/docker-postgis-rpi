@@ -27,7 +27,7 @@ RUN apt-get -y update
 RUN apt-get install -y postgresql-9.4-postgis-2.1
 
 # Start with supervisor
-ADD postgres.conf /etc/supervisor/conf.d/postgres.conf
+#ADD postgres.conf /etc/supervisor/conf.d/postgres.conf
 
 # Open port 5432 so linked containers can see them
 EXPOSE 5432
