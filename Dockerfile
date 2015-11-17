@@ -24,7 +24,7 @@ RUN apt-get -y install -y ca-certificates rpl pwgen wget nano
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 RUN apt-get -y update
-RUN apt-get -y install -y  postgresql postgis
+RUN apt-get -y install  postgresql-9.4 postgis
 
 RUN service postgresql start && /bin/su postgres -c "createuser -d -s -r -l docker" && /bin/su postgres -c "psql postgres -c \"ALTER USER docker WITH ENCRYPTED PASSWORD 'docker'\"" && service postgresql stop
 
