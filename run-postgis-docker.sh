@@ -7,6 +7,9 @@ cat << EOF
 usage: $0 options
 
 This script runs a new docker postgis instance for you.
+To get the image run:
+docker pull kartoza/postgis
+
 
 OPTIONS:
    -h      Show this message
@@ -53,11 +56,11 @@ else
     VOLUME_OPTION=""
 fi
 
-if [ ! -d $HOST_DATA_DIR ]
+if [ ! -d $VOLUME ]
 then
-    mkdir $HOST_DATA_DIR
+    mkdir $VOLUME
 fi
-chmod a+w $HOST_DATA_DIR
+chmod a+w $VOLUME
 
 docker kill ${CONTAINER_NAME}
 docker rm ${CONTAINER_NAME}
@@ -65,8 +68,8 @@ docker rm ${CONTAINER_NAME}
 CMD="docker run --name="${CONTAINER_NAME}" \
         --hostname="${CONTAINER_NAME}" \
         --restart=always \
-	-e USERNAME=${PGUSER} \
-	-e PASS=${PGPASSWORD} \
+	-e POSTGRES_USER=${PGUSER} \
+	-e POSTGRES_PASS=${PGPASSWORD} \
 	-d -t \
         ${VOLUME_OPTION} \
 	kartoza/postgis /start-postgis.sh"
@@ -77,14 +80,14 @@ eval $CMD
 
 docker ps | grep ${CONTAINER_NAME}
 
+IPADDRESS=`docker inspect postgis | grep IPAddress | grep -o '[0-9\.]*'`
+
 echo "Connect using:"
 echo "psql -l -p 5432 -h $IPADDRESS -U $PGUSER"
-echo "and password $PGPASS"
+echo "and password $PGPASSWORD"
 echo
 echo "Alternatively link to this container from another to access it"
 echo "e.g. docker run -link postgis:pg .....etc"
 echo "Will make the connection details to the postgis server available"
 echo "in your app container as $PG_PORT_5432_TCP_ADDR (for the ip address)"
 echo "and $PG_PORT_5432_TCP_PORT (for the port number)."
-
-
