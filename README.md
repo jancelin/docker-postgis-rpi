@@ -4,8 +4,6 @@ Modifié pour tourner sous raspberry pi
 
 A simple docker container that runs PostGIS
 
-Visit our page on the docker hub at: https://registry.hub.docker.com/u/kartoza/postgis/
-
 There are a number of other docker postgis containers out there. This one
 differentiates itself by:
 
