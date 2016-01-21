@@ -40,37 +40,12 @@ database storage.
 
 ## Getting the image
 
-There are various ways to get the image onto your system:
-
-
-The preferred way (but using most bandwidth for the initial image) is to
-get our docker trusted build like this:
-
-
-```
-docker pull kartoza/postgis
-```
 
 To build the image yourself without apt-cacher (also consumes more bandwidth
 since deb packages need to be refetched each time you build) do:
 
 ```
-docker build -t kartoza/postgis git://github.com/kartoza/docker-postgis
-```
-
-To build with apt-cache (and minimised download requirements) do you need to
-clone this repo locally first and modify the contents of 71-apt-cacher-ng to
-match your cacher host. Then build using a local url instead of directly from
-github.
-
-```
-git clone git://github.com/kartoza/docker-postgis
-```
-
-Now edit ``71-apt-cacher-ng`` then do:
-
-```
-docker build -t kartoza/postgis .
+docker build -t jancelin/rpi/postgis/slony git://github.com/jancelin/docker-postgis-rpi
 ```
 
 ## Run
@@ -79,7 +54,7 @@ docker build -t kartoza/postgis .
 To create a running container do:
 
 ```
-sudo docker run --name "postgis" -p 25432:5432 -d -t kartoza/postgis
+sudo docker run --name "postgis_slony" -p 5432:5432 -d -t jancelin/rpi/postgis/slony
 ```
 
 You can also use the following environment variables to pass a 
@@ -131,7 +106,7 @@ You can then go on to use any normal postgresql commands against the container.
 Under ubuntu 14.04 the postgresql client can be installed like this:
 
 ```
-sudo apt-get install postgresql-client-9.3
+sudo apt-get install postgresql-client-9.4
 ```
 
 
@@ -142,7 +117,7 @@ Docker volumes can be used to persist your data.
 
 ```
 mkdir -p ~/postgres_data
-docker run -d -v $HOME/postgres_data:/var/lib/postgresql kartoza/postgis`
+docker run -d -v $HOME/postgres_data:/var/lib/postgresql jancelin/rpi/postgis/slony
 ```
 
 You need to ensure the ``postgres_data`` directory has sufficient permissions
@@ -151,6 +126,7 @@ for the docker process to read / write it.
 
 
 ## Credits
+Julien ANCELIN
+FROM
+Tim Sutton
 
-Tim Sutton (tim@kartoza.com)
-May 2014
