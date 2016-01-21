@@ -114,8 +114,9 @@ sudo apt-get install postgresql-client-9.4
 Docker volumes can be used to persist your data.
 
 ```
-mkdir -p ~/postgres_data
-docker run -d -v $HOME/postgres_data:/var/lib/postgresql jancelin/rpi/postgis/slony
+mkdir -p ~/postgres_replication
+
+docker run --name "postgis_r" -p 5432:5432 -d -v $HOME/postgres_replication:/var/lib/postgresql -v $HOME/postgres_conf:/etc/postgresql jancelin/rpi/postgis/slony
 ```
 
 You need to ensure the ``postgres_data`` directory has sufficient permissions
