@@ -1,6 +1,6 @@
 #--------- Generic stuff all our Dockerfiles should start with so we get caching ------------
 FROM  resin/rpi-raspbian
-MAINTAINER Tim Sutton<tim@linfiniti.com>
+MAINTAINER Julien ANCELIN from Tim Sutton git
 
 RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
@@ -18,11 +18,7 @@ RUN apt-get -y install ca-certificates rpl pwgen
 
 #-------------Application Specific Stuff ----------------------------------------------------
 
-# Next line a workaround for https://github.com/dotcloud/docker/issues/963
-RUN apt-get install -y postgresql postgis nano  slony1-2-bin
-RUN service postgresql start && /bin/su postgres -c "createuser -d -s -r -l docker" && /bin/su postgres -c "psql postgres -c \"ALTER USER docker WITH ENCRYPTED PASSWORD 'docker'\"" && service postgresql stop
-
-# Start with supervisor
+RUN apt-get install -y postgresql-9.4-postgis-2.1 postgis netcat nano slony1-2-bin postgresql-9.4-slony1-2 postgresql-contrib-9.4
 ADD postgres.conf /etc/supervisor/conf.d/postgres.conf
 
 # Open port 5432 so linked containers can see them
@@ -38,5 +34,4 @@ RUN /setup.sh
 ADD start-postgis.sh /start-postgis.sh
 RUN chmod 0755 /start-postgis.sh
 
-USER postgres
 CMD /start-postgis.sh
