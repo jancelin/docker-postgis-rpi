@@ -18,7 +18,7 @@ RUN apt-get -y install ca-certificates rpl pwgen
 
 #-------------Application Specific Stuff ----------------------------------------------------
 
-RUN apt-get install -y postgresql-9.4-postgis-2.1 postgis netcat vim slony1-2-bin postgresql-9.4-slony1-2 postgresql-contrib-9.4
+RUN apt-get install -y postgresql-9.4-postgis-2.1 postgis netcat vim postgresql-contrib-9.4
 ADD postgres.conf /etc/supervisor/conf.d/postgres.conf
 
 # Open port 5432 so linked containers can see them
