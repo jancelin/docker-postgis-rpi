@@ -29,7 +29,7 @@ EXPOSE 5432
 ADD setup.sh /setup.sh
 RUN chmod 0755 /setup.sh
 RUN /setup.sh
-#login auto
+#login "docker" auto
 ADD .pgpass  /root/.pgpass
 RUN chmod 600 /root/.pgpass
 # We will run any commands in this when the container starts
