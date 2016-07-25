@@ -116,7 +116,7 @@ Docker volumes can be used to persist your data.
 ```
 mkdir -p ~/postgres_data
 
-docker run --name "postgis" -p 5432:5432 -d -v $HOME/postgres_data:/var/lib/postgresql  jancelin/rpi/postgis
+docker run --restart="always" --name "postgis" -p 5432:5432 -d -v $HOME/postgres_data:/var/lib/postgresql  jancelin/rpi/postgis
 ```
 
 You need to ensure the ``postgres_data`` directory has sufficient permissions
