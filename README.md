@@ -28,7 +28,7 @@ kartoza/postgis:[postgres_version]-[postgis-version]
 
 So for example:
 
-``kartoza/postgis:9.5-2.1`` Provides PostgreSQL 9.5, PostGIS 2.1
+``kartoza/postgis:9.5-2.2`` Provides PostgreSQL 9.5, PostGIS 2.2
 
 **Note:** We highly recommend that you use tagged versions because
 successive minor versions of PostgreSQL write their database clusters
@@ -114,9 +114,9 @@ sudo apt-get install postgresql-client-9.5
 Docker volumes can be used to persist your data.
 
 ```
-mkdir -p ~/postgres_replication
+mkdir -p ~/postgres_data
 
-docker run --name "postgis" -p 5432:5432 -d -v $HOME/postgres_replication:/var/lib/postgresql -v $HOME/postgres_conf:/etc/postgresql jancelin/rpi/postgis
+docker run --name "postgis" -p 5432:5432 -d -v $HOME/postgres_data:/var/lib/postgresql  jancelin/rpi/postgis
 ```
 
 You need to ensure the ``postgres_data`` directory has sufficient permissions
