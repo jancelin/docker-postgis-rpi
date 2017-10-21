@@ -26,7 +26,7 @@ RUN apt-get -y install ca-certificates rpl pwgen
 
 #-------------Application Specific Stuff ----------------------------------------------------
 
-RUN sudo apt-get -t stretch install -y postgresql-9.6-postgis-2.3 netcat vim
+RUN apt-get -t stretch install -y dialog postgresql-9.6-postgis-2.3 netcat vim
 #ADD postgres.conf /etc/supervisor/conf.d/postgres.conf
 
 # Open port 5432 so linked containers can see them
