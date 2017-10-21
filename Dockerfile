@@ -33,7 +33,7 @@ EXPOSE 5432
 # this dockerfile directly.
 ADD setup.sh /setup.sh
 RUN chmod 0755 /setup.sh
-RUN /setup.sh
+#RUN /setup.sh
 #login "docker" auto
 ADD .pgpass  /root/.pgpass
 RUN chmod 600 /root/.pgpass
