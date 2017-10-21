@@ -18,12 +18,15 @@ RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010
 RUN gpg -a --export 7638D0442B90D010 | sudo apt-key add -
 RUN gpg --keyserver pgpkeys.mit.edu --recv-key 8B48AD6246925553
 RUN gpg -a --export 8B48AD6246925553 | sudo apt-key add -
+RUN gpg --keyserver pgpkeys.mit.edu --recv-key EF0F382A1A7B6500
+RUN gpg -a --export EF0F382A1A7B6500 | sudo apt-key add -
+
 RUN apt-get -y update
 RUN apt-get -y install ca-certificates rpl pwgen
 
 #-------------Application Specific Stuff ----------------------------------------------------
 
-RUN apt-get -t stretch install -y postgresql-9.6-postgis-2.3 netcat vim
+RUN sudo apt-get -t stretch install -y postgresql-9.6-postgis-2.3 netcat vim
 #ADD postgres.conf /etc/supervisor/conf.d/postgres.conf
 
 # Open port 5432 so linked containers can see them
@@ -33,7 +36,7 @@ EXPOSE 5432
 # this dockerfile directly.
 ADD setup.sh /setup.sh
 RUN chmod 0755 /setup.sh
-#RUN /setup.sh
+RUN /setup.sh
 #login "docker" auto
 ADD .pgpass  /root/.pgpass
 RUN chmod 600 /root/.pgpass
