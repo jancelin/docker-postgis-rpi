@@ -94,6 +94,7 @@ echo "Check default db exists"
 if [[ ! ${RESULT} == '1' ]]; then
 	echo "Create default db ${POSTGRES_DBNAME}"
 	su - postgres -c "createdb -O ${POSTGRES_USER} -T template_postgis ${POSTGRES_DBNAME}"
+	su - postgres -c " psql $POSTGRES_DBNAME -f /home/$POSTGRES_DUMP "
 else
 	echo "${POSTGRES_DBNAME} db already exists"
 fi
