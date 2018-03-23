@@ -16,7 +16,7 @@ RUN apt-get -y update; apt-get -y install gnupg2 wget ca-certificates rpl pwgen
 # on docker hub e.g.
 # The following packages have unmet dependencies:
 RUN echo "deb    http://http.debian.net/debian sid main " >> /etc/apt/sources.list
-RUN apt-get update; apt-get -t sid install -y postgresql-client-10 postgresql-common postgresql-10 postgresql-10-postgis-2.4 postgresql-10-pgrouting netcat
+RUN apt-get update; apt-get -t sid install -y postgresql-client-10 postgresql-common postgresql-10 postgresql-10-postgis-2.4  netcat #postgresql-10-pgrouting
 
 # Open port 5432 so linked containers can see them
 EXPOSE 5432
