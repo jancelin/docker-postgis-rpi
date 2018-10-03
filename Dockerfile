@@ -1,6 +1,7 @@
 #--------- Generic stuff all our Dockerfiles should start with so we get caching ------------
-FROM debian:stable
-MAINTAINER Tim Sutton<tim@kartoza.com>
+FROM resin/raspberrypi3-debian:stretch
+MAINTAINER julien ancelin from Tim Sutton<tim@kartoza.com>
+RUN [ "cross-build-start" ]
 
 RUN  export DEBIAN_FRONTEND=noninteractive
 ENV  DEBIAN_FRONTEND noninteractive
@@ -44,4 +45,5 @@ RUN chmod +x /docker-entrypoint.sh
 RUN echo "kernel.shmmax=543252480" >> /etc/sysctl.conf
 RUN echo "kernel.shmall=2097152" >> /etc/sysctl.conf
 
+RUN [ "cross-build-end" ]
 ENTRYPOINT /docker-entrypoint.sh
